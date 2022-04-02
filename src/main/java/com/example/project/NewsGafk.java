@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.project;
 
 
 import org.jsoup.Jsoup;
