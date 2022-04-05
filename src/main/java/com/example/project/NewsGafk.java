@@ -3,21 +3,36 @@ package com.example.project;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class  NewsGafk {
     private static final  String URL = "http://gati.snau.edu.ua/news/index";
     private static final String descriptionsClaas = "description";
-
+    private static final String news_title = "news_title";
 
     public String lastNews(){
         try {
             Document document = Jsoup.connect(URL).get();
-
+            String result = "";
+            List <String> newsTextList = new ArrayList<>();
+            List <String> newsTitleList = new ArrayList<>();
             Elements description = document.getElementsByClass(descriptionsClaas);
-            return description.text();
+            Elements newsTitle = document.getElementsByClass(news_title);
+            for (Element element : description){
+                newsTextList.add(element.text());
+            }
+            for (Element element : newsTitle){
+                newsTitleList.add(element.text());
+            }
+            for (int i = 0; i<newsTextList.size(); i++){
+                result = "\n" + newsTextList.get(i) + "\n" + newsTitleList.get(i);
+            }
+
+            return result;
 
         } catch (IOException e) {
             e.printStackTrace();
