@@ -8,7 +8,8 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
+//TELEGRAM POLLING BOT DOCUMENT
+// GAFK NEW BOT
 public class GafkNewsBot extends TelegramLongPollingBot {
 
     private static final String BOT_NAME ="GafkNews";
@@ -32,14 +33,14 @@ public class GafkNewsBot extends TelegramLongPollingBot {
 
             if (update.hasMessage() && update.getMessage().hasText()) {
                 try {
-                    Message inMess = update.getMessage();
-                    String chatId = inMess.getChatId().toString();
-                String response = parseMessage(inMess.getText());
+                    Message inMess = update.getMessage();//Читаем смс если оно есть
+                    String chatId = inMess.getChatId().toString();// Читаем чат ид
+                String response = parseMessage(inMess.getText());//Парсим
                 SendMessage outMess = new SendMessage();
-                outMess.setChatId(chatId);
-                outMess.setText(response);
-                outMess.setReplyMarkup(inlineKeyboardMarkup);
-                execute(outMess);}
+                outMess.setChatId(chatId);//Прикрепляем ид куда отправить
+                outMess.setText(response);//Прикрепляем СМС
+                outMess.setReplyMarkup(inlineKeyboardMarkup);//Прикрепляем клавиатуру
+                execute(outMess);} // Отправляем ответ
 
              catch(TelegramApiException e){
                 e.printStackTrace();

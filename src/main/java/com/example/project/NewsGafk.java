@@ -17,7 +17,7 @@ public class  NewsGafk {
     public String lastNews(){
         try {
             Document document = Jsoup.connect(URL).get();
-            String result = "";
+            String result;
             List <String> newsTextList = new ArrayList<>();
             List <String> newsTitleList = new ArrayList<>();
             Elements description = document.getElementsByClass(descriptionsClaas);
@@ -28,9 +28,16 @@ public class  NewsGafk {
             for (Element element : newsTitle){
                 newsTitleList.add(element.text());
             }
+            StringBuilder resultBuilder = new StringBuilder();
             for (int i = 0; i<newsTextList.size(); i++){
-                result = "\n" + newsTextList.get(i) + "\n" + newsTitleList.get(i);
+                resultBuilder
+                        .append("\n")
+                        .append(newsTitleList.get(i))
+                        .append("\n")
+                        .append(newsTextList.get(i))
+                        .append("\n");
             }
+            result = resultBuilder.toString();
 
             return result;
 
